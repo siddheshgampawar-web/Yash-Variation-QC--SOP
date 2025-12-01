@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Variation Quality Check & Audit SOP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Mermaid.js for flowcharts -->
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true });
@@ -31,14 +30,8 @@
             margin-top: 0;
             font-size: 2.4em;
         }
-        hr {
-            margin: 2em 0;
-            border: none;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        section {
-            margin-bottom: 2.5em;
-        }
+        hr {margin: 2em 0;border: none;border-bottom: 1px solid #e0e0e0;}
+        section {margin-bottom: 2.5em;}
         .step {
             margin-bottom: 2.5em;
             padding: 1.2em 1.5em;
@@ -47,7 +40,6 @@
             border-radius: 7px;
             position: relative;
         }
-        .step h3 { margin-top: 0; }
         .label {
             display: inline-block;
             background: #ffe066;
@@ -67,38 +59,14 @@
             display: block;
             transition: box-shadow .2s;
         }
-        .screenshot:hover {
-            box-shadow: 0 0 16px #abc8ef;
-        }
-        figcaption {
-            font-size: 14px;
-            color: #333;
-            margin-top: 0.7em;
-        }
-        .mermaid {
-            margin: 1.5em 0 1.5em 0;
-            border-radius: 7px;
-            background: #f1f4fa;
-            padding: 15px;
-        }
-        /* Modal for click-to-zoom images */
+        .screenshot:hover {box-shadow: 0 0 16px #abc8ef;}
+        figcaption {font-size: 14px;color: #333;margin-top: 0.7em;}
+        .mermaid {margin: 1.5em 0 1.5em 0;border-radius: 7px;background: #f1f4fa;padding: 15px;}
         .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 99; 
-            left: 0; 
-            top:0; 
-            width: 100vw; 
-            height: 100vh; 
-            background: rgba(0,0,0,0.8);
+            display: none; position: fixed; z-index: 99; left: 0; top:0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8);
         }
         .modal img {
-            max-width: 92vw; 
-            max-height: 92vh; 
-            margin: 4vh auto; 
-            display: block; 
-            border-radius: 8px;
-            box-shadow: 0 0 25px #0007;
+            max-width: 92vw; max-height: 92vh; margin: 4vh auto; display: block; border-radius: 8px; box-shadow: 0 0 25px #0007;
         }
         .modal:after {
             content: 'Click anywhere to close';
@@ -108,7 +76,6 @@
             text-align: center;
             padding-bottom: 1.5em;
         }
-        /* Top right button */
         #top-right-link {
             position: fixed;
             top: 24px;
@@ -127,23 +94,16 @@
             font-weight: 600;
             transition: background 0.19s;
         }
-        #top-right-link a:hover {
-            background: #174a81;
-        }
+        #top-right-link a:hover {background: #174a81;}
         @media (max-width: 700px) {
-            main {
-                padding: 0.6em 0.2em 2em 0.2em;
-            }
+            main {padding: 0.6em 0.2em 2em 0.2em;}
             .screenshot { max-width: 99vw; }
             .step { padding: 1em 0.5em; }
             #top-right-link {
                 top: 10px;
                 right: 10px;
             }
-            #top-right-link a {
-                padding: 8px 14px;
-                font-size: 0.92em;
-            }
+            #top-right-link a {padding: 8px 14px; font-size: 0.92em;}
         }
     </style>
 </head>
@@ -183,17 +143,17 @@
         <div class="step">
             <h3>Step 1: Collection of Relevant Data</h3>
             <ul>
-                <li>Download the Masterfile from PXM (usually via the EPM).</li>
+                <li>Download the Masterfile from PXM (via the EPM).</li>
                 <li>Ensure details: SKUs, ASINs, item names, parent SKUs, parent–child links, variation themes, attributes.</li>
             </ul>
             <div class="mermaid">
 flowchart TD
-    Start([Start])
-    Start --> DownloadMF[Download Masterfile from PXM]
-    DownloadMF --> CheckDetails{All Required Details?}
-    CheckDetails -->|Yes| NextStep([Proceed to Template Preparation])
-    CheckDetails -->|No| FixMF[Update Masterfile]
-    FixMF --> DownloadMF
+Start([Start])
+--> DownloadMF[Download Masterfile from PXM]
+--> CheckDetails{All Required Details?}
+CheckDetails -- Yes --> NextStep([Proceed to Template Preparation])
+CheckDetails -- No --> FixMF[Update Masterfile]
+FixMF --> DownloadMF
             </div>
         </div>
 
@@ -213,13 +173,9 @@ flowchart TD
             </ul>
             <div class="mermaid">
 flowchart TD
-    MF[Masterfile]
-    ASC[ASC VAR (Amazon Backend)]
-    VW[Variation Wizard Frontend (VW VAR)]
-    Template[Template File]
-    MF --> Template
-    ASC --> Template
-    VW --> Template
+MF[Masterfile] --> Template[Template File]
+ASC[ASC VAR] --> Template
+VW[Variation Wizard (VW VAR)] --> Template
             </div>
             <figure>
                 <img src="your-screenshot-filename.png" class="screenshot" id="screenshot-step2" alt="Excel template with MF, ASC VAR, VW VAR and more sheets"
@@ -238,10 +194,10 @@ flowchart TD
             </ul>
             <div class="mermaid">
 flowchart TD
-    CLR[Download CLR] --> AddCLR[Add to Template]
-    ALR[Download ALR] --> AddALR[Add to Template]
-    AddCLR --> BackendSheet[Backend Data Review]
-    AddALR --> BackendSheet
+CLR[Download CLR] --> AddCLR[Add CLR to Template]
+ALR[Download ALR] --> AddALR[Add ALR to Template]
+AddCLR --> BackendSheet[Backend Data Review]
+AddALR --> BackendSheet
             </div>
         </div>
 
@@ -260,9 +216,9 @@ flowchart TD
             </ul>
             <div class="mermaid">
 flowchart TD
-    MF[Masterfile] --> CompareCLR[Compare to CLR (ASC VAR Sheet)]
-    CompareCLR -->|Parent SKU Match| \u2714[TRUE: Part of Correct Variation]
-    CompareCLR -->|No Match / NA| \u2716[FALSE: Not Part of Any/Correct Variation]
+MF[Masterfile] --> CompareCLR[Compare to CLR (ASC VAR Sheet)]
+CompareCLR -- Parent SKU Match --> TrueA[TRUE: Part of Correct Variation]
+CompareCLR -- No Match or NA --> FalseA[FALSE: Not Part of Any or Correct Variation]
             </div>
         </div>
 
@@ -271,12 +227,11 @@ flowchart TD
             <ul>
                 <li>Scrape data for all child SKUs using the Variation Wizard (Amazon frontend).</li>
                 <li>Add extracted data to <b>Variation Wizard</b> and <b>VW VAR</b> sheets.</li>
-                <li><b>How to find:</b> Catalog &gt; Add Products via Upload &gt; Variation Wizard</li>
             </ul>
             <div class="mermaid">
 flowchart TD
-    VW[Variation Wizard Frontend] --> DataExtract[Extract SKU, ASIN, etc.]
-    DataExtract --> AddToSheet[Add to VW/VW VAR Sheets]
+VW[Variation Wizard Frontend] --> DataExtract[Extract SKU, ASIN, etc.]
+DataExtract --> AddToSheet[Add to VW VAR Sheets]
             </div>
         </div>
 
@@ -306,14 +261,14 @@ flowchart TD
             </ul>
             <div class="mermaid">
 flowchart TD
-    MF[Masterfile] --> VWCompare[Compare to VW VAR Sheet]
-    VWCompare -->|Parent SKU Match| TrueResult[TRUE: Correct Variation]
-    VWCompare -->|Parent SKU Missing| ParentASINChk[Check Parent ASIN]
-    ParentASINChk -->|Match| Comment1[Comment: Parent SKU not found, but part of our variation]
-    ParentASINChk -->|No Match| Comment2[Comment: Not a part of our variation]
-    VWCompare -->|SKU Not Found| FalseResult2[FALSE: Not part of any variation]
-    VWCompare -->|Variation Theme Match| TrueResult2[TRUE]
-    VWCompare -->|Variation Theme Mismatch| FalseResult3[FALSE]
+MF[Masterfile] --> VWCompare[Compare to VW VAR Sheet]
+VWCompare -- Parent SKU Match --> TrueB[TRUE: Correct Variation]
+VWCompare -- Parent SKU Missing --> ParentASINChk[Check Parent ASIN]
+ParentASINChk -- Match --> Comment1B[Comment: Parent SKU not found, but part of our variation]
+ParentASINChk -- No Match --> Comment2B[Comment: Not a part of our variation]
+VWCompare -- SKU Not Found --> FalseB[FALSE: Not part of any variation]
+VWCompare -- Variation Theme Match --> TrueC[TRUE]
+VWCompare -- Variation Theme Mismatch --> FalseC[FALSE]
             </div>
         </div>
 
@@ -325,9 +280,7 @@ flowchart TD
             </ul>
             <div class="mermaid">
 flowchart TD
-    Review[Review Audit]
-    Review --> Comments[Add Comments & Markings]
-    Comments --> Submission[Prepare & Submit Final Template]
+Review[Review Audit] --> Comments[Add Comments & Markings] --> Submission[Prepare & Submit Final Template]
             </div>
         </div>
     </section>
@@ -340,16 +293,16 @@ flowchart TD
         <div class="step">
             <h3>Step 1: Collection of Relevant Data</h3>
             <ul>
-                <li>Download the Masterfile as provided in the task (ensure SKUs, item names, parent SKUs = Variant Group Id, parent–child relationships, variation themes, and relevant attributes).</li>
+                <li>Download the Masterfile as provided in the task.</li>
+                <li>Ensure SKUs, item names, parent SKUs (Variant Group Id), parent–child relationship details, variation themes, attribute details.</li>
             </ul>
             <div class="mermaid">
 flowchart TD
-    StartWM([Start])
-    StartWM --> DownloadWM[Download Masterfile]
-    DownloadWM --> CheckWM{Details Complete?}
-    CheckWM -->|Yes| NextWM([Proceed to Template Preparation])
-    CheckWM -->|No| FixWM[Update Masterfile]
-    FixWM --> DownloadWM
+StartWM([Start]) --> DownloadWM[Download Masterfile]
+DownloadWM --> CheckWM{Details Complete?}
+CheckWM -- Yes --> NextWM([Proceed to Template Preparation])
+CheckWM -- No --> FixWM[Update Masterfile]
+FixWM --> DownloadWM
             </div>
         </div>
 
@@ -366,9 +319,9 @@ flowchart TD
             </ul>
             <div class="mermaid">
 flowchart TD
-    MFWM[Masterfile] --> TemplateWM[Template File]
-    VariationAudit[Variation Audit Sheet] --> TemplateWM
-    ItemReport[Item Report Sheet] --> TemplateWM
+MFWM[Masterfile] --> TemplateWM[Template File]
+VariationAudit[Variation Audit Sheet] --> TemplateWM
+ItemReport[Item Report Sheet] --> TemplateWM
             </div>
         </div>
 
@@ -380,8 +333,8 @@ flowchart TD
             </ul>
             <div class="mermaid">
 flowchart TD
-    DownloadIR[Download Item Report] --> AddIR[Add to Item Report Sheet]
-    AddIR --> BackendReviewWM[Backend Data Review]
+DownloadIR[Download Item Report] --> AddIR[Add to Item Report Sheet]
+AddIR --> BackendReviewWM[Backend Data Review]
             </div>
         </div>
 
@@ -400,10 +353,10 @@ flowchart TD
             </ul>
             <div class="mermaid">
 flowchart TD
-    MFWM[Masterfile] --> IR[Item Report]
-    IR --> CompareIR[Compare to MF in Variation Audit Sheet]
-    CompareIR -->|Parent SKU Match| TrueWM[TRUE: Correct Variation]
-    CompareIR -->|No Match / NA| FalseWM[FALSE: Not Correct/Any Variation]
+MFWM[Masterfile] --> IR[Item Report]
+IR --> CompareIR[Compare to MF in Variation Audit Sheet]
+CompareIR -- Parent SKU Match --> TrueWM[TRUE: Correct Variation]
+CompareIR -- No Match or NA --> FalseWM[FALSE: Not Correct or Any Variation]
             </div>
         </div>
 
@@ -415,21 +368,17 @@ flowchart TD
             </ul>
             <div class="mermaid">
 flowchart TD
-    ReviewWM[Review Audit (Walmart)]
-    ReviewWM --> CommentsWM[Add Comments/Markings]
-    CommentsWM --> SubmitWM[Prepare & Submit Final Template]
+ReviewWM[Review Audit (Walmart)] --> CommentsWM[Add Comments/Markings] --> SubmitWM[Prepare & Submit Final Template]
             </div>
         </div>
     </section>
 </main>
 
-<!-- Modal for full-size screenshots -->
 <div class="modal" id="img-modal" onclick="this.style.display='none';">
     <img id="modal-img" src="">
 </div>
 <script>
     document.addEventListener('keyup',function(e){ if(e.key==='Escape'){document.getElementById('img-modal').style.display='none';} });
 </script>
-
 </body>
 </html>
