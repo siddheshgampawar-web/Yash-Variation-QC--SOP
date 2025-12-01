@@ -1,2 +1,400 @@
-# Yash-Variation-QC--SOP
-Yash Variation QC- SOP
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Variation Quality Check & Audit SOP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Mermaid.js for flowcharts -->
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f6f7fb;
+            color: #232425;
+            margin: 0;
+        }
+        main {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 2em 1.5em 3em 1.5em;
+            background: #fff;
+            box-shadow: 0 0 32px rgba(0,0,0,0.10);
+            border-radius: 10px;
+        }
+        h1, h2, h3 {
+            color: #2d5aa6;
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 2.4em;
+        }
+        hr {
+            margin: 2em 0;
+            border: none;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        section {
+            margin-bottom: 2.5em;
+        }
+        .step {
+            margin-bottom: 2.5em;
+            padding: 1.2em 1.5em;
+            background: #f8fafc;
+            border-left: 5px solid #3879db;
+            border-radius: 7px;
+            position: relative;
+        }
+        .step h3 { margin-top: 0; }
+        .label {
+            display: inline-block;
+            background: #ffe066;
+            color: #3b3a30;
+            border-radius: 4px;
+            padding: 2px 11px;
+            margin-left: 10px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .screenshot {
+            max-width: 320px;
+            cursor: zoom-in;
+            margin-top: 1.5em;
+            border: 2px solid #3366cc;
+            border-radius: 6px;
+            display: block;
+            transition: box-shadow .2s;
+        }
+        .screenshot:hover {
+            box-shadow: 0 0 16px #abc8ef;
+        }
+        figcaption {
+            font-size: 14px;
+            color: #333;
+            margin-top: 0.7em;
+        }
+        .mermaid {
+            margin: 1.5em 0 1.5em 0;
+            border-radius: 7px;
+            background: #f1f4fa;
+            padding: 15px;
+        }
+        /* Modal for click-to-zoom images */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 99; 
+            left: 0; 
+            top:0; 
+            width: 100vw; 
+            height: 100vh; 
+            background: rgba(0,0,0,0.8);
+        }
+        .modal img {
+            max-width: 92vw; 
+            max-height: 92vh; 
+            margin: 4vh auto; 
+            display: block; 
+            border-radius: 8px;
+            box-shadow: 0 0 25px #0007;
+        }
+        .modal:after {
+            content: 'Click anywhere to close';
+            display: block;
+            color: #fff;
+            font-size: 1.3em;
+            text-align: center;
+            padding-bottom: 1.5em;
+        }
+        @media (max-width: 700px) {
+            main {
+                padding: 0.6em 0.2em 2em 0.2em;
+            }
+            .screenshot { max-width: 99vw; }
+            .step { padding: 1em 0.5em; }
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Variation Quality Check & Audit SOP</h1>
+    <section>
+        <h2>Purpose</h2>
+        <ul>
+            <li>Ensure variation families (parent–child) are accurate, policy‑compliant, and shopper‑friendly.</li>
+            <li>Validate that parent–child linkages align to allowed variation themes and are correctly structured.</li>
+            <li>Identify and fix issues: orphaned/mis-mapped children, duplicate parents, missing attributes.</li>
+            <li>Confirm whether each SKU is part of the defined variation family; separate or merge as needed.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Overview of Variation</h2>
+        <ul>
+            <li><b>Parent:</b> Non-buyable product, e.g., a main product page for a group.</li>
+            <li><b>Child:</b> Buyable products, differing by attributes like size or color.</li>
+            <li><b>Variation Theme:</b> Defines what attributes children vary on (e.g., size, color).</li>
+            <li><b>Family:</b> Parent plus all its children.</li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <section class="steps">
+        <h2>Variation Quality Check for Amazon</h2>
+
+        <div class="step">
+            <h3>Step 1: Collection of Relevant Data</h3>
+            <ul>
+                <li>Download the Masterfile from PXM (usually via the EPM).</li>
+                <li>Ensure details: SKUs, ASINs, item names, parent SKUs, parent–child links, variation themes, attributes.</li>
+            </ul>
+            <div class="mermaid">
+flowchart TD
+    Start([Start])
+    Start --> DownloadMF[Download Masterfile from PXM]
+    DownloadMF --> CheckDetails{All Required Details?}
+    CheckDetails -->|Yes| NextStep([Proceed to Template Preparation])
+    CheckDetails -->|No| FixMF[Update Masterfile]
+    FixMF --> DownloadMF
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Prepare a Template to Compare Data</h3>
+            <ul>
+                <li>Prepare a template with sheets:
+                  <ul>
+                    <li><b>MF:</b> (Masterfile data)</li>
+                    <li><b>ASC VAR:</b> Amazon backend audit</li>
+                    <li><b>VW VAR:</b> Variation Wizard frontend audit</li>
+                    <li><b>Variation Wizard:</b> Raw data (manual scrape)</li>
+                    <li><b>Category Listing Report (CLR):</b> Amazon backend</li>
+                    <li><b>All Listing Report (ALR):</b> All backend SKUs</li>
+                  </ul>
+                </li>
+            </ul>
+            <div class="mermaid">
+flowchart TD
+    MF[Masterfile]
+    ASC[ASC VAR (Amazon Backend)]
+    VW[Variation Wizard Frontend (VW VAR)]
+    Template[Template File]
+    MF --> Template
+    ASC --> Template
+    VW --> Template
+            </div>
+            <figure>
+                <img src="your-screenshot-filename.png" class="screenshot" id="screenshot-step2" alt="Excel template with MF, ASC VAR, VW VAR and more sheets"
+                     onclick="document.getElementById('modal-img').src=this.src;document.getElementById('img-modal').style.display='block';">
+                <figcaption>
+                    Master file data to add in Variation QC Template<span class="label">Screenshot</span>
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Extract Data from Category Listing Report (CLR) & All Listings Report (ALR)</h3>
+            <ul>
+                <li>Generate CLR and ALR reports from Amazon Seller Central.</li>
+                <li>Add these reports to the template (CLR and ALR sheets) for backend verification.</li>
+            </ul>
+            <div class="mermaid">
+flowchart TD
+    CLR[Download CLR] --> AddCLR[Add to Template]
+    ALR[Download ALR] --> AddALR[Add to Template]
+    AddCLR --> BackendSheet[Backend Data Review]
+    AddALR --> BackendSheet
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 4: Variation QC for Amazon Backend</h3>
+            <ul>
+                <li>Compare CLR data with the Masterfile in the ASC VAR sheet to generate backend audit results.</li>
+                <li>
+                    <b>Logic:</b>
+                    <ul>
+                        <li>If parent SKU of a child in MF matches parent SKU in CLR → <b>TRUE</b>: Correct variation</li>
+                        <li>If not → <b>FALSE</b>: Not part of correct variation</li>
+                        <li>If parent SKU is NA/0 in CLR → <b>FALSE</b>: Not part of any variation</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="mermaid">
+flowchart TD
+    MF[Masterfile] --> CompareCLR[Compare to CLR (ASC VAR Sheet)]
+    CompareCLR -->|Parent SKU Match| \u2714[TRUE: Part of Correct Variation]
+    CompareCLR -->|No Match / NA| \u2716[FALSE: Not Part of Any/Correct Variation]
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 5: Extract Data from Variation Wizard</h3>
+            <ul>
+                <li>Scrape data for all child SKUs using the Variation Wizard (Amazon frontend).</li>
+                <li>Add extracted data to <b>Variation Wizard</b> and <b>VW VAR</b> sheets.</li>
+                <li><b>How to find:</b> Catalog &gt; Add Products via Upload &gt; Variation Wizard</li>
+            </ul>
+            <div class="mermaid">
+flowchart TD
+    VW[Variation Wizard Frontend] --> DataExtract[Extract SKU, ASIN, etc.]
+    DataExtract --> AddToSheet[Add to VW/VW VAR Sheets]
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 6: Variation QC for Amazon Frontend (Via Variation Wizard)</h3>
+            <ul>
+                <li>Compare VW VAR data with Masterfile to generate frontend audit results.</li>
+                <li>
+                    <b>Logic:</b>
+                    <ul>
+                        <li>If parent SKU of child in MF matches VW → <b>TRUE</b>: Part of correct variation</li>
+                        <li>If parent SKU missing in VW, cross-check parent ASIN:
+                            <ul>
+                                <li>If parent ASIN matches → Comment: "Parent SKU not found, but it is part of our variation"</li>
+                                <li>If not → Comment: "Not a part of our variation"</li>
+                            </ul>
+                        </li>
+                        <li>If VW data for a child SKU not found → <b>FALSE</b>: Not part of any variation</li>
+                        <li>Match Variation Theme MF vs VW:
+                            <ul>
+                                <li>If matches → <b>TRUE</b></li>
+                                <li>If not → <b>FALSE</b></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="mermaid">
+flowchart TD
+    MF[Masterfile] --> VWCompare[Compare to VW VAR Sheet]
+    VWCompare -->|Parent SKU Match| TrueResult[TRUE: Correct Variation]
+    VWCompare -->|Parent SKU Missing| ParentASINChk[Check Parent ASIN]
+    ParentASINChk -->|Match| Comment1[Comment: Parent SKU not found, but part of our variation]
+    ParentASINChk -->|No Match| Comment2[Comment: Not a part of our variation]
+    VWCompare -->|SKU Not Found| FalseResult2[FALSE: Not part of any variation]
+    VWCompare -->|Variation Theme Match| TrueResult2[TRUE]
+    VWCompare -->|Variation Theme Mismatch| FalseResult3[FALSE]
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 7: Report and Submit Task</h3>
+            <ul>
+                <li>Check all results, verify alignments, and confirm comments/markups are correct.</li>
+                <li>Prepare the final template and submit the results.</li>
+            </ul>
+            <div class="mermaid">
+flowchart TD
+    Review[Review Audit]
+    Review --> Comments[Add Comments & Markings]
+    Comments --> Submission[Prepare & Submit Final Template]
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section class="steps">
+        <h2>Variation Quality Check for Walmart (Summary)</h2>
+
+        <div class="step">
+            <h3>Step 1: Collection of Relevant Data</h3>
+            <ul>
+                <li>Download the Masterfile as provided in the task (ensure SKUs, item names, parent SKUs = Variant Group Id, parent–child relationships, variation themes, and relevant attributes).</li>
+            </ul>
+            <div class="mermaid">
+flowchart TD
+    StartWM([Start])
+    StartWM --> DownloadWM[Download Masterfile]
+    DownloadWM --> CheckWM{Details Complete?}
+    CheckWM -->|Yes| NextWM([Proceed to Template Preparation])
+    CheckWM -->|No| FixWM[Update Masterfile]
+    FixWM --> DownloadWM
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Prepare a Template to Compare Data</h3>
+            <ul>
+                <li>Prepare a template with sheets:
+                    <ul>
+                        <li><b>MF:</b> Masterfile data</li>
+                        <li><b>Variation Audit:</b> Walmart backend audit</li>
+                        <li><b>Item Report:</b> Walmart Seller Central backend</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="mermaid">
+flowchart TD
+    MFWM[Masterfile] --> TemplateWM[Template File]
+    VariationAudit[Variation Audit Sheet] --> TemplateWM
+    ItemReport[Item Report Sheet] --> TemplateWM
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Extract Data from Item Report</h3>
+            <ul>
+                <li>Generate & download Item Report from Walmart Seller Central.</li>
+                <li>Add this to the Item Report sheet for backend verification (review variation themes, attributes, parent SKUs).</li>
+            </ul>
+            <div class="mermaid">
+flowchart TD
+    DownloadIR[Download Item Report] --> AddIR[Add to Item Report Sheet]
+    AddIR --> BackendReviewWM[Backend Data Review]
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 4: Variation QC for Walmart Backend</h3>
+            <ul>
+                <li>Compare Item Report data with Masterfile in Variation Audit sheet.</li>
+                <li>
+                    <b>Logic:</b>
+                    <ul>
+                        <li>If parent SKU in MF matches Variant Group ID in Item Report → <b>TRUE</b></li>
+                        <li>If not → <b>FALSE</b></li>
+                        <li>If parent SKU is NA/0 in Item Report → <b>FALSE</b></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="mermaid">
+flowchart TD
+    MFWM[Masterfile] --> IR[Item Report]
+    IR --> CompareIR[Compare to MF in Variation Audit Sheet]
+    CompareIR -->|Parent SKU Match| TrueWM[TRUE: Correct Variation]
+    CompareIR -->|No Match / NA| FalseWM[FALSE: Not Correct/Any Variation]
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 5: Report and Submit Task</h3>
+            <ul>
+                <li>Check all details, verify alignments, confirm comments/markups.</li>
+                <li>Prepare and submit the final template file.</li>
+            </ul>
+            <div class="mermaid">
+flowchart TD
+    ReviewWM[Review Audit (Walmart)]
+    ReviewWM --> CommentsWM[Add Comments/Markings]
+    CommentsWM --> SubmitWM[Prepare & Submit Final Template]
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Modal for full-size screenshots -->
+<div class="modal" id="img-modal" onclick="this.style.display='none';">
+    <img id="modal-img" src="">
+</div>
+<script>
+    document.addEventListener('keyup',function(e){ if(e.key==='Escape'){document.getElementById('img-modal').style.display='none';} });
+</script>
+
+</body>
+</html>
