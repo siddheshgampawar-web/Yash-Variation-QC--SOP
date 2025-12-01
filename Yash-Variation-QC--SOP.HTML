@@ -108,24 +108,59 @@
             text-align: center;
             padding-bottom: 1.5em;
         }
+        /* Top right button */
+        #top-right-link {
+            position: fixed;
+            top: 24px;
+            right: 42px;
+            z-index: 100;
+        }
+        #top-right-link a {
+            display: inline-block;
+            background: #2779bd;
+            color: #fff;
+            text-decoration: none;
+            padding: 11px 26px;
+            border-radius: 24px;
+            font-size: 1em;
+            box-shadow: 0 0 8px rgba(52,84,169,0.14);
+            font-weight: 600;
+            transition: background 0.19s;
+        }
+        #top-right-link a:hover {
+            background: #174a81;
+        }
         @media (max-width: 700px) {
             main {
                 padding: 0.6em 0.2em 2em 0.2em;
             }
             .screenshot { max-width: 99vw; }
             .step { padding: 1em 0.5em; }
+            #top-right-link {
+                top: 10px;
+                right: 10px;
+            }
+            #top-right-link a {
+                padding: 8px 14px;
+                font-size: 0.92em;
+            }
         }
     </style>
 </head>
 <body>
+    <div id="top-right-link">
+        <a href="https://iserve-my.sharepoint.com/:w:/r/personal/siddhesh_gampawar_pattern_com/Documents/SOP%20VA%20QC%20(1).docx?d=wc5bb187949e2417b9fa212aa38504a34&csf=1&web=1&e=nqBztS" target="_blank">
+            Variation QC SOP Word File
+        </a>
+    </div>
 <main>
     <h1>Variation Quality Check & Audit SOP</h1>
     <section>
         <h2>Purpose</h2>
         <ul>
-            <li>Ensure variation families (parent–child) are accurate, policy‑compliant, and shopper‑friendly.</li>
-            <li>Validate that parent–child linkages align to allowed variation themes and are correctly structured.</li>
-            <li>Identify and fix issues: orphaned/mis-mapped children, duplicate parents, missing attributes.</li>
+            <li>Ensure variation families (parent–child) are accurate, policy‑compliant, and shopper‑friendly so customers can easily find and select the correct variant.</li>
+            <li>Validate that parent–child linkages align to the allowed variation theme and are correctly structured.</li>
+            <li>Identify and fix variation breakdowns (orphaned/mis‑mapped children, duplicate parents, missing attributes).</li>
             <li>Confirm whether each SKU is part of the defined variation family; separate or merge as needed.</li>
         </ul>
     </section>
@@ -133,10 +168,10 @@
     <section>
         <h2>Overview of Variation</h2>
         <ul>
-            <li><b>Parent:</b> Non-buyable product, e.g., a main product page for a group.</li>
-            <li><b>Child:</b> Buyable products, differing by attributes like size or color.</li>
-            <li><b>Variation Theme:</b> Defines what attributes children vary on (e.g., size, color).</li>
-            <li><b>Family:</b> Parent plus all its children.</li>
+            <li><b>Parent:</b> Non-buyable product displayed in detail pages.</li>
+            <li><b>Child:</b> Buyable products, related to parent product by size and/or color.</li>
+            <li><b>Variation Theme:</b> Defines how the child products differ from each other, such as size-color.</li>
+            <li><b>Family:</b> Parent + all children.</li>
         </ul>
     </section>
 
@@ -215,7 +250,7 @@ flowchart TD
             <ul>
                 <li>Compare CLR data with the Masterfile in the ASC VAR sheet to generate backend audit results.</li>
                 <li>
-                    <b>Logic:</b>
+                <b>Logic:</b>
                     <ul>
                         <li>If parent SKU of a child in MF matches parent SKU in CLR → <b>TRUE</b>: Correct variation</li>
                         <li>If not → <b>FALSE</b>: Not part of correct variation</li>
@@ -250,7 +285,7 @@ flowchart TD
             <ul>
                 <li>Compare VW VAR data with Masterfile to generate frontend audit results.</li>
                 <li>
-                    <b>Logic:</b>
+                <b>Logic:</b>
                     <ul>
                         <li>If parent SKU of child in MF matches VW → <b>TRUE</b>: Part of correct variation</li>
                         <li>If parent SKU missing in VW, cross-check parent ASIN:
