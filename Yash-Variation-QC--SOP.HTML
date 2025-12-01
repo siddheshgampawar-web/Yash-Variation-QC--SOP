@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Variation Quality Check & Audit SOP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Mermaid.js for flowcharts -->
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true });
@@ -26,12 +27,9 @@
         h1, h2, h3 {
             color: #2d5aa6;
         }
-        h1 {
-            margin-top: 0;
-            font-size: 2.4em;
-        }
-        hr {margin: 2em 0;border: none;border-bottom: 1px solid #e0e0e0;}
-        section {margin-bottom: 2.5em;}
+        h1 { margin-top: 0; font-size: 2.4em; }
+        hr { margin: 2em 0; border: none; border-bottom: 1px solid #e0e0e0;}
+        section { margin-bottom: 2.5em; }
         .step {
             margin-bottom: 2.5em;
             padding: 1.2em 1.5em;
@@ -59,9 +57,9 @@
             display: block;
             transition: box-shadow .2s;
         }
-        .screenshot:hover {box-shadow: 0 0 16px #abc8ef;}
-        figcaption {font-size: 14px;color: #333;margin-top: 0.7em;}
-        .mermaid {margin: 1.5em 0 1.5em 0;border-radius: 7px;background: #f1f4fa;padding: 15px;}
+        .screenshot:hover { box-shadow: 0 0 16px #abc8ef; }
+        figcaption { font-size: 14px; color: #333; margin-top: 0.7em; }
+        .mermaid { margin: 1.5em 0 1.5em 0; border-radius: 7px; background: #f1f4fa; padding: 15px; }
         .modal {
             display: none; position: fixed; z-index: 99; left: 0; top:0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8);
         }
@@ -94,16 +92,16 @@
             font-weight: 600;
             transition: background 0.19s;
         }
-        #top-right-link a:hover {background: #174a81;}
+        #top-right-link a:hover { background: #174a81; }
         @media (max-width: 700px) {
-            main {padding: 0.6em 0.2em 2em 0.2em;}
+            main { padding: 0.6em 0.2em 2em 0.2em; }
             .screenshot { max-width: 99vw; }
             .step { padding: 1em 0.5em; }
             #top-right-link {
                 top: 10px;
                 right: 10px;
             }
-            #top-right-link a {padding: 8px 14px; font-size: 0.92em;}
+            #top-right-link a { padding: 8px 14px; font-size: 0.92em; }
         }
     </style>
 </head>
@@ -148,12 +146,12 @@
             </ul>
             <div class="mermaid">
 flowchart TD
-Start([Start])
---> DownloadMF[Download Masterfile from PXM]
---> CheckDetails{All Required Details?}
-CheckDetails -- Yes --> NextStep([Proceed to Template Preparation])
-CheckDetails -- No --> FixMF[Update Masterfile]
-FixMF --> DownloadMF
+    Start
+    Start --> DownloadMF[Download Masterfile from PXM]
+    DownloadMF --> CheckDetails{All Required Details?}
+    CheckDetails -- Yes --> NextStep[Proceed to Template Preparation]
+    CheckDetails -- No --> FixMF[Update Masterfile]
+    FixMF --> DownloadMF
             </div>
         </div>
 
@@ -173,9 +171,9 @@ FixMF --> DownloadMF
             </ul>
             <div class="mermaid">
 flowchart TD
-MF[Masterfile] --> Template[Template File]
-ASC[ASC VAR] --> Template
-VW[Variation Wizard (VW VAR)] --> Template
+    MF[Masterfile] --> Template[Template File]
+    ASC[ASC VAR] --> Template
+    VW[Variation Wizard (VW VAR)] --> Template
             </div>
             <figure>
                 <img src="your-screenshot-filename.png" class="screenshot" id="screenshot-step2" alt="Excel template with MF, ASC VAR, VW VAR and more sheets"
@@ -194,10 +192,10 @@ VW[Variation Wizard (VW VAR)] --> Template
             </ul>
             <div class="mermaid">
 flowchart TD
-CLR[Download CLR] --> AddCLR[Add CLR to Template]
-ALR[Download ALR] --> AddALR[Add ALR to Template]
-AddCLR --> BackendSheet[Backend Data Review]
-AddALR --> BackendSheet
+    CLR[Download CLR] --> AddCLR[Add CLR to Template]
+    ALR[Download ALR] --> AddALR[Add ALR to Template]
+    AddCLR --> BackendSheet[Backend Data Review]
+    AddALR --> BackendSheet
             </div>
         </div>
 
@@ -216,9 +214,9 @@ AddALR --> BackendSheet
             </ul>
             <div class="mermaid">
 flowchart TD
-MF[Masterfile] --> CompareCLR[Compare to CLR (ASC VAR Sheet)]
-CompareCLR -- Parent SKU Match --> TrueA[TRUE: Part of Correct Variation]
-CompareCLR -- No Match or NA --> FalseA[FALSE: Not Part of Any or Correct Variation]
+    MF[Masterfile] --> CompareCLR[Compare to CLR (ASC VAR Sheet)]
+    CompareCLR -- Parent SKU Match --> TrueA[TRUE: Part of Correct Variation]
+    CompareCLR -- No Match or NA --> FalseA[FALSE: Not Part of Any or Correct Variation]
             </div>
         </div>
 
@@ -230,8 +228,8 @@ CompareCLR -- No Match or NA --> FalseA[FALSE: Not Part of Any or Correct Variat
             </ul>
             <div class="mermaid">
 flowchart TD
-VW[Variation Wizard Frontend] --> DataExtract[Extract SKU, ASIN, etc.]
-DataExtract --> AddToSheet[Add to VW VAR Sheets]
+    VW[Variation Wizard Frontend] --> DataExtract[Extract SKU, ASIN, etc.]
+    DataExtract --> AddToSheet[Add to VW VAR Sheets]
             </div>
         </div>
 
@@ -261,14 +259,14 @@ DataExtract --> AddToSheet[Add to VW VAR Sheets]
             </ul>
             <div class="mermaid">
 flowchart TD
-MF[Masterfile] --> VWCompare[Compare to VW VAR Sheet]
-VWCompare -- Parent SKU Match --> TrueB[TRUE: Correct Variation]
-VWCompare -- Parent SKU Missing --> ParentASINChk[Check Parent ASIN]
-ParentASINChk -- Match --> Comment1B[Comment: Parent SKU not found, but part of our variation]
-ParentASINChk -- No Match --> Comment2B[Comment: Not a part of our variation]
-VWCompare -- SKU Not Found --> FalseB[FALSE: Not part of any variation]
-VWCompare -- Variation Theme Match --> TrueC[TRUE]
-VWCompare -- Variation Theme Mismatch --> FalseC[FALSE]
+    MF[Masterfile] --> VWCompare[Compare to VW VAR Sheet]
+    VWCompare -- Parent SKU Match --> TrueB[TRUE: Correct Variation]
+    VWCompare -- Parent SKU Missing --> ParentASINChk[Check Parent ASIN]
+    ParentASINChk -- Match --> Comment1B[Comment: Parent SKU not found, but part of our variation]
+    ParentASINChk -- No Match --> Comment2B[Comment: Not a part of our variation]
+    VWCompare -- SKU Not Found --> FalseB[FALSE: Not part of any variation]
+    VWCompare -- Variation Theme Match --> TrueC[TRUE]
+    VWCompare -- Variation Theme Mismatch --> FalseC[FALSE]
             </div>
         </div>
 
@@ -280,7 +278,7 @@ VWCompare -- Variation Theme Mismatch --> FalseC[FALSE]
             </ul>
             <div class="mermaid">
 flowchart TD
-Review[Review Audit] --> Comments[Add Comments & Markings] --> Submission[Prepare & Submit Final Template]
+    Review[Review Audit] --> Comments[Add Comments & Markings] --> Submission[Prepare & Submit Final Template]
             </div>
         </div>
     </section>
@@ -298,11 +296,11 @@ Review[Review Audit] --> Comments[Add Comments & Markings] --> Submission[Prepar
             </ul>
             <div class="mermaid">
 flowchart TD
-StartWM([Start]) --> DownloadWM[Download Masterfile]
-DownloadWM --> CheckWM{Details Complete?}
-CheckWM -- Yes --> NextWM([Proceed to Template Preparation])
-CheckWM -- No --> FixWM[Update Masterfile]
-FixWM --> DownloadWM
+    StartWM --> DownloadWM[Download Masterfile]
+    DownloadWM --> CheckWM{Details Complete?}
+    CheckWM -- Yes --> NextWM[Proceed to Template Preparation]
+    CheckWM -- No --> FixWM[Update Masterfile]
+    FixWM --> DownloadWM
             </div>
         </div>
 
@@ -319,9 +317,9 @@ FixWM --> DownloadWM
             </ul>
             <div class="mermaid">
 flowchart TD
-MFWM[Masterfile] --> TemplateWM[Template File]
-VariationAudit[Variation Audit Sheet] --> TemplateWM
-ItemReport[Item Report Sheet] --> TemplateWM
+    MFWM[Masterfile] --> TemplateWM[Template File]
+    VariationAudit[Variation Audit Sheet] --> TemplateWM
+    ItemReport[Item Report Sheet] --> TemplateWM
             </div>
         </div>
 
@@ -333,8 +331,8 @@ ItemReport[Item Report Sheet] --> TemplateWM
             </ul>
             <div class="mermaid">
 flowchart TD
-DownloadIR[Download Item Report] --> AddIR[Add to Item Report Sheet]
-AddIR --> BackendReviewWM[Backend Data Review]
+    DownloadIR[Download Item Report] --> AddIR[Add to Item Report Sheet]
+    AddIR --> BackendReviewWM[Backend Data Review]
             </div>
         </div>
 
@@ -353,10 +351,10 @@ AddIR --> BackendReviewWM[Backend Data Review]
             </ul>
             <div class="mermaid">
 flowchart TD
-MFWM[Masterfile] --> IR[Item Report]
-IR --> CompareIR[Compare to MF in Variation Audit Sheet]
-CompareIR -- Parent SKU Match --> TrueWM[TRUE: Correct Variation]
-CompareIR -- No Match or NA --> FalseWM[FALSE: Not Correct or Any Variation]
+    MFWM[Masterfile] --> IR[Item Report]
+    IR --> CompareIR[Compare to MF in Variation Audit Sheet]
+    CompareIR -- Parent SKU Match --> TrueWM[TRUE: Correct Variation]
+    CompareIR -- No Match or NA --> FalseWM[FALSE: Not Correct or Any Variation]
             </div>
         </div>
 
@@ -368,7 +366,7 @@ CompareIR -- No Match or NA --> FalseWM[FALSE: Not Correct or Any Variation]
             </ul>
             <div class="mermaid">
 flowchart TD
-ReviewWM[Review Audit (Walmart)] --> CommentsWM[Add Comments/Markings] --> SubmitWM[Prepare & Submit Final Template]
+    ReviewWM[Review Audit (Walmart)] --> CommentsWM[Add Comments/Markings] --> SubmitWM[Prepare & Submit Final Template]
             </div>
         </div>
     </section>
